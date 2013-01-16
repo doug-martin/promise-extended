@@ -1,4 +1,4 @@
-[![build status](https://secure.travis-ci.org/doug-martin/promise-extended.png)](http://travis-ci.org/doug-martin/promise-extended)
+[![Build Status](https://travis-ci.org/doug-martin/promise-extended.png?branch=master)](undefined)
 
 # promise-extended
 
