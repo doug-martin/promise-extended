@@ -412,7 +412,7 @@
             if (isArray(list)) {
                 return callNext(list, [], false);
             } else {
-                throw new Error("When calling comb.serial the first argument must be an array");
+                throw new Error("When calling promise.serial the first argument must be an array");
             }
         }
 
@@ -421,7 +421,7 @@
             if (isArray(list)) {
                 return callNext(list, [], true);
             } else {
-                throw new Error("When calling comb.serial the first argument must be an array");
+                throw new Error("When calling promise.serial the first argument must be an array");
             }
         }
 
