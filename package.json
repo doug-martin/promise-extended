@@ -1,0 +1,32 @@
+{
+    "name": "promise-extended",
+    "version": "0.0.1",
+    "description": "Promises implementation with chainable API",
+    "main": "index.js",
+    "scripts": {
+        "test": "it -r dot"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git:git@github.com:doug-martin/promise-extended.git"
+    },
+    "keywords": [
+        "Promise",
+        "extender",
+        "utilities"
+    ],
+    "author": "Doug Martin",
+    "license": "MIT",
+    "dependencies": {
+        "extender": "0.0.4",
+        "is-extended": "0.0.1",
+        "array-extended": "0.0.1",
+        "function-extended": "0.0.1",
+        "declare.js": "0.0.3"
+    },
+    "devDependencies": {
+        "it": "~0.1.0",
+        "grunt-it": "~0.2.0",
+        "promises-aplus-tests": "*"
+    }
+}
