@@ -11,7 +11,7 @@
     }
 
 
-    function definePromise(declare, extender, array, is, fn) {
+    function definePromise(declare, extended, array, is, fn) {
 
         var forEach = array.forEach,
             isUndefinedOrNull = is.isUndefinedOrNull,
@@ -461,7 +461,7 @@
         }
 
 
-        return extender
+        return extended
             .define({
                 isPromiseLike: isPromiseLike
             }).expose({
@@ -483,14 +483,14 @@
 
     if ("undefined" !== typeof exports) {
         if ("undefined" !== typeof module && module.exports) {
-            module.exports = definePromise(require("declare.js"), require("extender"), require("array-extended"), require("is-extended"), require("function-extended"));
+            module.exports = definePromise(require("declare.js"), require("extended"), require("array-extended"), require("is-extended"), require("function-extended"));
         }
     } else if ("function" === typeof define) {
         define(["require"], function (require) {
-            return definePromise(require("declare.js"), require("extender"), require("array-extended"), require("is-extended"), require("function-extended"));
+            return definePromise(require("declare.js"), require("extended"), require("array-extended"), require("is-extended"), require("function-extended"));
         });
     } else {
-        this.arrayExtended = definePromise(this.declare, this.extender, this.arrayExtended, this.isExtended, this.functionExtended);
+        this.arrayExtended = definePromise(this.declare, this.extended, this.arrayExtended, this.isExtended, this.functionExtended);
     }
 
 }).call(this);
