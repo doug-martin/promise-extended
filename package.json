@@ -19,9 +19,9 @@
     "license": "MIT",
     "dependencies": {
         "extended": "0.0.2",
-        "is-extended": "0.0.1",
-        "array-extended": "0.0.1",
-        "function-extended": "0.0.1",
+        "is-extended": "0.0.2",
+        "array-extended": "0.0.2",
+        "function-extended": "0.0.2",
         "declare.js": "0.0.3"
     },
     "devDependencies": {
