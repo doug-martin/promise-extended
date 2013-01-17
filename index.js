@@ -465,6 +465,7 @@
             .define({
                 isPromiseLike: isPromiseLike
             }).expose({
+                isPromiseLike: isPromiseLike,
                 when: when,
                 wrap: wrap,
                 wait: wait,
