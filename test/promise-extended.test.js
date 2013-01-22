@@ -4,7 +4,8 @@ var it = require('it'),
     promise = require(".."),
     fn = require("function-extended"),
     Promise = promise.Promise,
-    PromiseList = promise.PromiseList;
+    PromiseList = promise.PromiseList,
+    array = require("array-extended");
 
 
 it.describe("promise-extended",function (it) {
@@ -19,7 +20,7 @@ it.describe("promise-extended",function (it) {
                     next();
                 });
 
-                process.nextTick(fn.bind(promise, "callback", "hello"));
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
             });
 
             it.should("callback after callback has already been called", function (next) {
@@ -42,7 +43,7 @@ it.describe("promise-extended",function (it) {
                     assert.equal(res, "error");
                     next();
                 });
-                process.nextTick(fn.bind(promise, "errback", "error"));
+                setTimeout(fn.bind(promise, "errback", "error"), 0);
             });
 
             it.should("errback when after errback has already been called", function (next) {
@@ -64,7 +65,7 @@ it.describe("promise-extended",function (it) {
                     assert.equal(res, "callback");
                     next();
                 });
-                process.nextTick(fn.bind(promise, "callback", "callback"), 1000);
+                setTimeout(fn.bind(promise, "callback", "callback"), 0);
             });
 
             it.should("callback when using both and errback is called", function (next) {
@@ -73,7 +74,7 @@ it.describe("promise-extended",function (it) {
                     assert.equal(res, "errback");
                     next();
                 });
-                process.nextTick(fn.bind(promise, "errback", "errback"), 1000);
+                setTimeout(fn.bind(promise, "errback", "errback"), 0);
             });
 
             it.should("callback when using both and callback is called", function (next) {
@@ -99,18 +100,18 @@ it.describe("promise-extended",function (it) {
                 promise.both(
                     function (res) {
                         var promise2 = new Promise();
-                        process.nextTick(fn.bind(promise2, "callback", res + " world"));
+                        setTimeout(fn.bind(promise2, "callback", res + " world"), 0);
                         return promise2;
                     }, next).both(
                     function (res) {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "callback", res + "!"));
+                        setTimeout(fn.bind(promise3, "callback", res + "!"), 0);
                         return promise3;
                     }, next).then(function (res) {
                         assert.equal(res, "hello world!");
                         next();
                     }, next);
-                process.nextTick(fn.bind(promise, "callback", "hello"));
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
 
             });
 
@@ -122,13 +123,13 @@ it.describe("promise-extended",function (it) {
                     }, next).both(
                     function (res) {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "callback", res + "!"));
+                        setTimeout(fn.bind(promise3, "callback", res + "!"), 0);
                         return promise3;
                     }, next).then(function (res) {
                         assert.equal(res, "hello world!");
                         next();
                     }, next);
-                process.nextTick(fn.bind(promise, "callback", "hello"));
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
 
             });
 
@@ -137,18 +138,18 @@ it.describe("promise-extended",function (it) {
                 promise.both(
                     function (res) {
                         var promise2 = new Promise();
-                        process.nextTick(fn.bind(promise2, "errback", res + " error"));
+                        setTimeout(fn.bind(promise2, "errback", res + " error"), 0);
                         return promise2;
                     }).both(
                     function (res) {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "callback", res + " error"));
+                        setTimeout(fn.bind(promise3, "callback", res + " error"), 0);
                         return promise3;
                     }).then(function (res) {
                         assert.equal(res, "error error error");
                         next();
                     }, next);
-                process.nextTick(fn.bind(promise, "errback", "error"));
+                setTimeout(fn.bind(promise, "errback", "error"), 0);
 
             });
 
@@ -160,13 +161,13 @@ it.describe("promise-extended",function (it) {
                     }).both(
                     function (res) {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "callback", res + " error"));
+                        setTimeout(fn.bind(promise3, "callback", res + " error"), 0);
                         return promise3;
                     }).then(function (res) {
                         assert.equal(res, "error error error");
                         next();
                     }, next);
-                process.nextTick(fn.bind(promise, "errback", "error"));
+                setTimeout(fn.bind(promise, "errback", "error"), 0);
 
             });
 
@@ -178,13 +179,13 @@ it.describe("promise-extended",function (it) {
                     }).both(
                     function (res) {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "callback", res + " error"));
+                        setTimeout(fn.bind(promise3, "callback", res + " error"), 0);
                         return promise3;
                     }).then(function (res) {
                         assert.equal(res, "error error error");
                         next();
                     }, next);
-                process.nextTick(fn.bind(promise, "callback", "error"));
+                setTimeout(fn.bind(promise, "callback", "error"), 0);
 
             });
 
@@ -199,7 +200,7 @@ it.describe("promise-extended",function (it) {
                     assert.equal(res, "callback");
                     next();
                 }, next);
-                process.nextTick(fn.bind(promise, "callback", "callback"), 1000);
+                setTimeout(fn.bind(promise, "callback", "callback"), 0);
             });
 
             it.should("errback when using then and errback is called", function (next) {
@@ -208,7 +209,7 @@ it.describe("promise-extended",function (it) {
                     assert.equal(res, "errback");
                     next();
                 });
-                process.nextTick(fn.bind(promise, "errback", "errback"), 1000);
+                setTimeout(fn.bind(promise, "errback", "errback"), 0);
             });
 
 
@@ -235,18 +236,18 @@ it.describe("promise-extended",function (it) {
                 promise.then(
                     function (res) {
                         var promise2 = new Promise();
-                        process.nextTick(fn.bind(promise2, "callback", res + " world"), 1000);
+                        setTimeout(fn.bind(promise2, "callback", res + " world"), 0);
                         return promise2;
                     }, next).then(
                     function (res) {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "callback", res + "!"), 1000);
+                        setTimeout(fn.bind(promise3, "callback", res + "!"), 0);
                         return promise3;
                     }, next).then(function (res) {
                         assert.equal(res, "hello world!");
                         next();
                     }, next);
-                process.nextTick(fn.bind(promise, "callback", "hello"), 1000);
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
             });
 
             it.should("work with sync actions also", function (next) {
@@ -261,7 +262,7 @@ it.describe("promise-extended",function (it) {
                         assert.equal(res, "hello world!");
                         next();
                     }, next);
-                process.nextTick(fn.bind(promise, "callback", "hello"), 1000);
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
             });
 
             it.should("work with values", function (next) {
@@ -273,7 +274,7 @@ it.describe("promise-extended",function (it) {
                     }).then(function (res) {
                         assert.equal(res, "hello!");
                     }).classic(next);
-                process.nextTick(fn.bind(promise, "callback", "hello"), 1000);
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
             });
 
             it.should("errback if there is an error ", function (next) {
@@ -281,19 +282,19 @@ it.describe("promise-extended",function (it) {
                 promise.then(
                     function (res) {
                         var promise2 = new Promise();
-                        process.nextTick(fn.bind(promise2, "callback", res + " world"), 1000);
+                        setTimeout(fn.bind(promise2, "callback", res + " world"), 0);
                         return promise2;
                     }, next)
                     .then(function () {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "errback", "error"), 1000);
+                        setTimeout(fn.bind(promise3, "errback", "error"), 0);
                         return promise3;
                     })
                     .then(next, function (res) {
                         assert.equal(res, "error");
                         next();
                     });
-                process.nextTick(fn.bind(promise, "callback", "hello"));
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
 
             });
 
@@ -302,24 +303,24 @@ it.describe("promise-extended",function (it) {
                 promise.then(
                     function (res) {
                         var promise2 = new Promise();
-                        process.nextTick(fn.bind(promise2, "callback", res + " world"), 1000);
+                        setTimeout(fn.bind(promise2, "callback", res + " world"), 0);
                         return promise2;
                     }).then(
-                    function (res) {
+                    function () {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "errback", "error in 3"), 1000);
+                        setTimeout(fn.bind(promise3, "errback", "error in 3"), 0);
                         return promise3;
                     }).then(
                     function (res) {
                         var promise4 = new Promise();
-                        process.nextTick(fn.bind(promise4, "callback", res + " not called"));
+                        setTimeout(fn.bind(promise4, "callback", res + " not called"), 0);
                         return promise4;
                     })
                     .then(next, function (res) {
                         assert.equal(res, "error in 3");
                         next();
                     });
-                process.nextTick(fn.bind(promise, "callback", "hello"));
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
 
             });
 
@@ -328,17 +329,17 @@ it.describe("promise-extended",function (it) {
                 promise.then(
                     function (res) {
                         var promise2 = new Promise();
-                        process.nextTick(fn.bind(promise2, "callback", res + " world"), 1000);
+                        setTimeout(fn.bind(promise2, "callback", res + " world"), 0);
                         return promise2;
                     }).then(
-                    function (res) {
+                    function () {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "errback", "error in 3"), 1000);
+                        setTimeout(fn.bind(promise3, "errback", "error in 3"), 0);
                         return promise3;
                     }).then(
                     function (res) {
                         var promise4 = new Promise();
-                        process.nextTick(fn.bind(promise4, "callback", res + " not called"));
+                        setTimeout(fn.bind(promise4, "callback", res + " not called"), 0);
                         return promise4;
                     }, function () {
                         return "error caught!";
@@ -347,7 +348,7 @@ it.describe("promise-extended",function (it) {
                         assert.equal(res, "error caught!");
                         next();
                     }, next);
-                process.nextTick(fn.bind(promise, "callback", "hello"));
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
 
             });
 
@@ -356,28 +357,28 @@ it.describe("promise-extended",function (it) {
                 promise.then(
                     function (res) {
                         var promise2 = new Promise();
-                        process.nextTick(fn.bind(promise2, "callback", res + " world"), 1000);
+                        setTimeout(fn.bind(promise2, "callback", res + " world"), 0);
                         return promise2;
                     }).then(
-                    function (res) {
+                    function () {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "errback", "error in 3"), 1000);
+                        setTimeout(fn.bind(promise3, "errback", "error in 3"), 0);
                         return promise3;
                     }).then(
                     function (res) {
                         var promise4 = new Promise();
-                        process.nextTick(fn.bind(promise4, "callback", res + " not called"));
+                        setTimeout(fn.bind(promise4, "callback", res + " not called"), 0);
                         return promise4;
                     }, function () {
                         var promise4 = new Promise();
-                        process.nextTick(fn.bind(promise4, "callback", "error caught!"));
+                        setTimeout(fn.bind(promise4, "callback", "error caught!"), 0);
                         return promise4;
                     })
                     .then(function (res) {
                         assert.equal(res, "error caught!");
                         next();
                     }, next);
-                process.nextTick(fn.bind(promise, "callback", "hello"));
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
             });
 
             it.should("allow the catching of errors if an errback is and returns a promise and re throwing ", function (next) {
@@ -385,17 +386,17 @@ it.describe("promise-extended",function (it) {
                 promise.then(
                     function (res) {
                         var promise2 = new Promise();
-                        process.nextTick(fn.bind(promise2, "callback", res + " world"), 1000);
+                        setTimeout(fn.bind(promise2, "callback", res + " world"), 0);
                         return promise2;
                     }).then(
-                    function (res) {
+                    function () {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "errback", "error in 3"), 1000);
+                        setTimeout(fn.bind(promise3, "errback", "error in 3"), 0);
                         return promise3;
                     }).then(
                     function (res) {
                         var promise4 = new Promise();
-                        process.nextTick(fn.bind(promise4, "callback", res + " not called"));
+                        setTimeout(fn.bind(promise4, "callback", res + " not called"), 0);
                         return promise4;
                     }, function () {
                         throw new Error("error caught!");
@@ -404,7 +405,7 @@ it.describe("promise-extended",function (it) {
                         assert.equal(res.message, "error caught!");
                         next();
                     }, next);
-                process.nextTick(fn.bind(promise, "callback", "hello"));
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
             });
 
             it.should("allow the catching of errors if an errback is and returns a promise and errback again ", function (next) {
@@ -412,28 +413,28 @@ it.describe("promise-extended",function (it) {
                 promise.then(
                     function (res) {
                         var promise2 = new Promise();
-                        process.nextTick(fn.bind(promise2, "callback", res + " world"), 1000);
+                        setTimeout(fn.bind(promise2, "callback", res + " world"), 0);
                         return promise2;
                     }).then(
-                    function (res) {
+                    function () {
                         var promise3 = new Promise();
-                        process.nextTick(fn.bind(promise3, "errback", "error in 3"), 1000);
+                        setTimeout(fn.bind(promise3, "errback", "error in 3"), 0);
                         return promise3;
                     }).then(
                     function (res) {
                         var promise4 = new Promise();
-                        process.nextTick(fn.bind(promise4, "callback", res + " not called"));
+                        setTimeout(fn.bind(promise4, "callback", res + " not called"), 0);
                         return promise4;
                     }, function () {
                         var promise4 = new Promise();
-                        process.nextTick(fn.bind(promise4, "errback", "error caught!"));
+                        setTimeout(fn.bind(promise4, "errback", "error caught!"), 0);
                         return promise4;
                     })
                     .then(next, function (res) {
                         assert.equal(res, "error caught!");
                         next();
                     }, next);
-                process.nextTick(fn.bind(promise, "callback", "hello"));
+                setTimeout(fn.bind(promise, "callback", "hello"), 0);
             });
         });
 
@@ -446,16 +447,16 @@ it.describe("promise-extended",function (it) {
                     assert.equal(res, "callback");
                     next();
                 });
-                process.nextTick(fn.bind(promise, "callback", "callback"), 1000);
+                setTimeout(fn.bind(promise, "callback", "callback"), 0);
             });
 
             it.should("errback when using classic and errback is called", function (next) {
                 var promise = new Promise();
-                promise.classic(function (err, res) {
+                promise.classic(function (err) {
                     assert.equal(err, "errback");
                     next();
                 });
-                process.nextTick(fn.bind(promise, "errback", "errback"), 1000);
+                setTimeout(fn.bind(promise, "errback", "errback"), 0);
             });
 
         });
@@ -466,19 +467,18 @@ it.describe("promise-extended",function (it) {
     it.describe(".PromiseList", function (it) {
 
 
-        it.should("should callback after all have fired ", function (next) {
+        it.should("should callback after all have fired ", function () {
 
             var promise = new Promise(), promise2 = new Promise(), promise3 = new Promise();
             setTimeout(fn.bind(promise, "callback", "hello"), 100);
             setTimeout(fn.bind(promise2, "callback", "world"), 150);
             setTimeout(fn.bind(promise3, "callback", "!"), 200);
-            new PromiseList([promise, promise2, promise3]).then(function (res) {
+            return new PromiseList([promise, promise2, promise3]).then(function (res) {
                 var expected = ["hello", "world", "!"];
-                res.forEach(function (r, i) {
+                array(res).forEach(function (r, i) {
                     assert.equal(r[1], expected[i]);
                 });
-                next();
-            }, next);
+            });
         });
 
         it.should("callback immediately if no promises are provided", function (next) {
@@ -502,7 +502,7 @@ it.describe("promise-extended",function (it) {
             promise3.callback("!");
             new PromiseList([promise, promise2, promise3]).then(function (res) {
                 var expected = ["hello", "world", "!"];
-                res.forEach(function (r, i) {
+                array(res).forEach(function (r, i) {
                     assert.equal(r[1], expected[i]);
                 });
                 next();
@@ -515,14 +515,16 @@ it.describe("promise-extended",function (it) {
             promise2.callback("world");
             promise3.errback("error");
             var pl = new PromiseList([promise, promise2, promise3]);
-            process.nextTick(function () {
+            setTimeout(function () {
                 pl.then(next, function (res) {
-                    res.forEach(function (res) {
-                        assert.equal(res[1], "error");
+                    array(res).forEach(function (res) {
+                        if (res) {
+                            assert.equal(res[1], "error");
+                        }
                     });
                     next();
                 });
-            });
+            }, 0);
         });
 
         it.should("handle the ordering of results if resolved out of order", function (next) {
@@ -532,7 +534,7 @@ it.describe("promise-extended",function (it) {
             setTimeout(fn.bind(promise3, "callback", "!"), 100);
             new PromiseList([promise, promise2, promise3]).then(function (res) {
                 var expected = ["hello", "world", "!"];
-                res.forEach(function (res, i) {
+                array(res).forEach(function (res, i) {
                     assert.equal(res[1], expected[i]);
                 });
                 next();
@@ -552,9 +554,9 @@ it.describe("promise-extended",function (it) {
 
         it.should("accept a promise as a callback", function (next) {
             var promise = new Promise(), promise2 = new Promise(), promise3 = new Promise();
-            process.nextTick(fn.bind(promise, "callback", "hello"));
-            process.nextTick(fn.bind(promise2, "callback", "world"));
-            process.nextTick(fn.bind(promise3, "callback", "!"));
+            setTimeout(fn.bind(promise, "callback", "hello"), 0);
+            setTimeout(fn.bind(promise2, "callback", "world"), 0);
+            setTimeout(fn.bind(promise3, "callback", "!"), 0);
             var p2 = new Promise();
             p2.then(function (res) {
                 assert.deepEqual(res, ["hello", "world", "!"]);
@@ -565,9 +567,9 @@ it.describe("promise-extended",function (it) {
 
         it.should("accept a promise as a errback", function (next) {
             var promise = new Promise(), promise2 = new Promise(), promise3 = new Promise();
-            process.nextTick(fn.bind(promise, "callback", "hello"));
-            process.nextTick(fn.bind(promise2, "callback", "world"));
-            process.nextTick(fn.bind(promise3, "errback", "error"));
+            setTimeout(fn.bind(promise, "callback", "hello"), 0);
+            setTimeout(fn.bind(promise2, "callback", "world"), 0);
+            setTimeout(fn.bind(promise3, "errback", "error"), 0);
             var p2 = new Promise();
             p2.then(next, function (res) {
                 assert.equal(res[2], "error");
@@ -585,7 +587,7 @@ it.describe("promise-extended",function (it) {
                 assert.equal(res, "hello");
                 next();
             }, next);
-            process.nextTick(fn.bind(p, "callback", "hello"));
+            setTimeout(fn.bind(p, "callback", "hello"), 0);
         });
 
         it.should("honor the promise api with no callback or errback and erroring", function (next) {
@@ -594,7 +596,7 @@ it.describe("promise-extended",function (it) {
                 assert.equal(res, "error");
                 next();
             });
-            process.nextTick(fn.bind(p, "errback", "error"));
+            setTimeout(fn.bind(p, "errback", "error"), 0);
         });
 
 
@@ -899,9 +901,9 @@ it.describe("promise-extended",function (it) {
                 next();
             });
             waiter(true);
-            process.nextTick(function () {
+            setTimeout(function () {
                 p.resolve(null);
-            });
+            }, 0);
         });
 
         it.should("allow multiple executions", function (next) {
@@ -915,9 +917,9 @@ it.describe("promise-extended",function (it) {
                 }
             });
             waiter(1);
-            process.nextTick(function () {
+            setTimeout(function () {
                 p.resolve(null);
-            });
+            }, 0);
         });
 
     });

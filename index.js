@@ -402,7 +402,7 @@
             return function _wrap() {
                 var ret = new Promise();
                 var args = argsToArray(arguments);
-                args.push(ret.resolve.bind(ret));
+                args.push(ret.resolve);
                 fn.apply(scope || this, args);
                 return ret.promise();
             };
@@ -434,10 +434,10 @@
             return function waiter() {
                 if (!resolved) {
                     args = arguments;
-                    return p.then(function doneWaiting() {
+                    return p.then(bind(this, function doneWaiting() {
                         resolved = true;
                         return fn.apply(this, args);
-                    }.bind(this));
+                    }));
                 } else {
                     return when(fn.apply(this, arguments));
                 }
