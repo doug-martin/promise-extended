@@ -1,6 +1,6 @@
 {
     "name": "promise-extended",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Promises implementation with chainable API",
     "main": "index.js",
     "scripts": {
@@ -28,11 +28,11 @@
     "author": "Doug Martin",
     "license": "MIT",
     "dependencies": {
-        "extended": "0.0.2",
-        "is-extended": "0.0.2",
-        "array-extended": "0.0.2",
-        "function-extended": "0.0.2",
-        "declare.js": "0.0.3"
+        "extended": "~0.0.3",
+        "is-extended": "~0.0.3",
+        "array-extended": "~0.0.3",
+        "function-extended": "~0.0.3",
+        "declare.js": "~0.0.3"
     },
     "devDependencies": {
         "it": "~0.2.0",
