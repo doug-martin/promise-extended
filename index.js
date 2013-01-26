@@ -491,7 +491,7 @@
             return definePromise(require("declare.js"), require("extended"), require("array-extended"), require("is-extended"), require("function-extended"));
         });
     } else {
-        this.arrayExtended = definePromise(this.declare, this.extended, this.arrayExtended, this.isExtended, this.functionExtended);
+        this.promiseExtended = definePromise(this.declare, this.extended, this.arrayExtended, this.isExtended, this.functionExtended);
     }
 
 }).call(this);
