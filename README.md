@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/doug-martin/promise-extended.png?branch=master)](undefined)
 
-[![browser support](http://ci.testling.com/doug-martin/promise-extended.png)](http://ci.testling.com/doug-martin/promise-extended)
+[![browser support](https://ci.testling.com/doug-martin/promise-extended.png)](https://ci.testling.com/doug-martin/promise-extended)
 
 # promise-extended
 
