@@ -314,11 +314,11 @@
                     var args = argsToArray(arguments);
                     if (this.normalizeResults) {
                         args = args.slice(1);
-                        args = args.length == 1 ? args.pop() : args;
+                        args = args.length === 1 ? args.pop() : args;
                     }
                     this.__results[i] = args;
                     this.__firedLength++;
-                    if (this.__firedLength == this.__defLength) {
+                    if (this.__firedLength === this.__defLength) {
                         this.__resolve();
                     }
                     return this.promise();
@@ -332,11 +332,11 @@
                     var args = argsToArray(arguments);
                     if (this.normalizeResults) {
                         args = args.slice(1);
-                        args = args.length == 1 ? args.pop() : args;
+                        args = args.length === 1 ? args.pop() : args;
                     }
                     this.__errors[i] = args;
                     this.__firedLength++;
-                    if (this.__firedLength == this.__defLength) {
+                    if (this.__firedLength === this.__defLength) {
                         this.__resolve();
                     }
                     return this.promise();
@@ -375,11 +375,13 @@
             args = argsToArray(arguments);
             if (!args.length) {
                 p = new Promise().callback(args).promise();
-            } else if (args.length == 1) {
+            } else if (args.length === 1) {
                 args = args.pop();
                 if (isPromiseLike(args)) {
                     if (args.addCallback && args.addErrback) {
-                        p = args;
+                        p = new Promise();
+                        args.addCallback(p.callback);
+                        args.addErrback(p.errback);
                     } else {
                         console.log(args);
                         p = wrapThenPromise(args);

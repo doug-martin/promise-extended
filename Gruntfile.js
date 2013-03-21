@@ -7,18 +7,13 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
-        pkg: '<json:package.json>',
-        meta: {
-            banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-                '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-                '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
-                '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;' +
-                ' Licensed <%= pkg.license %> */'
-        },
+        pkg: grunt.file.readJSON('package.json'),
 
         jshint: {
-            options: jshintOptions,
-            globals: jshintOptions.predef
+            file: "./index.js",
+            options: {
+                jshintrc: '.jshintrc'
+            }
         },
 
         lint: {
@@ -46,7 +41,20 @@ module.exports = function (grunt) {
             files: '<config:lint.files>',
             tasks: 'lint it'
         },
-        uglify: {}
+        uglify: {
+            options: {
+                banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+                    '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+                    '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+                    '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;' +
+                    ' Licensed <%= pkg.license %> */\n'
+            },
+            min: {
+                files: {
+                    '<%= pkg.name %>.min.js': ['index.js']
+                }
+            }
+        }
     });
 
     grunt.registerTask("promises-aplus", "run promises a plus test", function () {
@@ -64,7 +72,9 @@ module.exports = function (grunt) {
     });
 
     // Default task.
-    grunt.registerTask('default', 'lint it promises-aplus min');
+    grunt.registerTask('default', ['jshint', 'it', 'promises-aplus', 'uglify:min']);
     grunt.loadNpmTasks('grunt-it');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
 };
