@@ -489,8 +489,8 @@
             module.exports = definePromise(require("declare.js"), require("extended"), require("array-extended"), require("is-extended"), require("function-extended"));
         }
     } else if ("function" === typeof define) {
-        define(["require"], function (require) {
-            return definePromise(require("declare.js"), require("extended"), require("array-extended"), require("is-extended"), require("function-extended"));
+        define(["declare", "extended", "array-extended", "is-extended", "function-extended"], function (declare, extended, array, is, fn) {
+            return definePromise(declare, extended, array, is, fn);
         });
     } else {
         this.promiseExtended = definePromise(this.declare, this.extended, this.arrayExtended, this.isExtended, this.functionExtended);
