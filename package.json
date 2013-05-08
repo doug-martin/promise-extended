@@ -1,6 +1,6 @@
 {
     "name": "promise-extended",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "Promises implementation with chainable API",
     "main": "index.js",
     "scripts": {
