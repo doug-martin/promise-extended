@@ -43,7 +43,9 @@
             }
         } else if (typeof process !== "undefined") {
             // node
-            nextTick = process.nextTick;
+            nextTick = function (cb) {
+                process.nextTick(cb);
+            };
         } else if (typeof MessageChannel !== "undefined") {
             // modern browsers
             // http://www.nonblocking.io/2011/06/windownexttick.html
@@ -491,7 +493,7 @@
         if ("undefined" !== typeof module && module.exports) {
             module.exports = definePromise(require("declare.js"), require("extended"), require("array-extended"), require("is-extended"), require("function-extended"));
         }
-    } else if ("function" === typeof define) {
+    } else if ("function" === typeof define && define.amd) {
         define(["declare", "extended", "array-extended", "is-extended", "function-extended"], function (declare, extended, array, is, fn) {
             return definePromise(declare, extended, array, is, fn);
         });
