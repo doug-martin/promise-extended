@@ -3,15 +3,7 @@
     /*global setImmediate, MessageChannel*/
 
 
-    var arraySlice = Array.prototype.slice;
-
-    function argsToArray(args, slice) {
-        slice = slice || 0;
-        return arraySlice.call(args, slice);
-    }
-
-
-    function definePromise(declare, extended, array, is, fn) {
+    function definePromise(declare, extended, array, is, fn, args) {
 
         var forEach = array.forEach,
             isUndefinedOrNull = is.isUndefinedOrNull,
@@ -19,7 +11,8 @@
             isFunction = is.isFunction,
             isBoolean = is.isBoolean,
             bind = fn.bind,
-            bindIgnore = fn.bindIgnore;
+            bindIgnore = fn.bindIgnore,
+            argsToArray = args.argsToArray;
 
         function createHandler(fn, promise) {
             return function _handler() {
@@ -491,14 +484,14 @@
 
     if ("undefined" !== typeof exports) {
         if ("undefined" !== typeof module && module.exports) {
-            module.exports = definePromise(require("declare.js"), require("extended"), require("array-extended"), require("is-extended"), require("function-extended"));
+            module.exports = definePromise(require("declare.js"), require("extended"), require("array-extended"), require("is-extended"), require("function-extended"), require("arguments-extended"));
         }
     } else if ("function" === typeof define && define.amd) {
-        define(["declare", "extended", "array-extended", "is-extended", "function-extended"], function (declare, extended, array, is, fn) {
-            return definePromise(declare, extended, array, is, fn);
+        define(["declare", "extended", "array-extended", "is-extended", "function-extended", "arguments-extended"], function (declare, extended, array, is, fn, args) {
+            return definePromise(declare, extended, array, is, fn, args);
         });
     } else {
-        this.promiseExtended = definePromise(this.declare, this.extended, this.arrayExtended, this.isExtended, this.functionExtended);
+        this.promiseExtended = definePromise(this.declare, this.extended, this.arrayExtended, this.isExtended, this.functionExtended, this.argumentsExtended);
     }
 
 }).call(this);

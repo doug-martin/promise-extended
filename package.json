@@ -1,6 +1,6 @@
 {
     "name": "promise-extended",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "Promises implementation with chainable API",
     "main": "index.js",
     "scripts": {
@@ -32,6 +32,7 @@
         "is-extended": "~0.0.3",
         "array-extended": "~0.0.3",
         "function-extended": "~0.0.3",
+        "arguments-extended": "~0.0.3",
         "grunt": "~0.4.1",
         "declare.js": "~0.0.3",
         "grunt-contrib-jshint": "~0.3.0"
