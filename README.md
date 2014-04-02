@@ -1,4 +1,9 @@
-[![Build Status](https://travis-ci.org/doug-martin/promise-extended.png?branch=master)](undefined)
+<a href="http://promisesaplus.com/">
+    <img src="http://promisesaplus.com/assets/logo-small.png" alt="Promises/A+ logo"
+         title="Promises/A+ 1.0 compliant" align="right" />
+</a>
+
+[![Build Status](https://travis-ci.org/doug-martin/promise-extended.svg?branch=master)](https://travis-ci.org/doug-martin/promise-extended)
 
 [![browser support](https://ci.testling.com/doug-martin/promise-extended.png)](https://ci.testling.com/doug-martin/promise-extended)
 

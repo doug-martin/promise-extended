@@ -58,17 +58,9 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask("promises-aplus", "run promises a plus test", function () {
-        var done = this.async();
-        var child = require("child_process").spawn("promises-aplus-tests", ["test/aplus-adapter"]);
-        child.stdout.pipe(process.stdout);
-        child.stderr.pipe(process.stderr);
-        child.on("close", function (code) {
-            if (code !== 0) {
-                done(false);
-            } else {
-                done();
-            }
-        });
+        var promisesAplusTests = require("promises-aplus-tests");
+
+        promisesAplusTests(require("./test/aplus-adapter"), { reporter: "spec" }, this.async());
     });
 
     // Default task.
